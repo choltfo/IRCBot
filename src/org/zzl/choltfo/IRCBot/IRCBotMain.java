@@ -112,7 +112,6 @@ class IRCBot extends PircBot {
 		}
 		
 		out.close();
-
 	}
 	
 	public void onMessage(String channel, String sender, String login, String hostname, String message) {
@@ -147,6 +146,7 @@ class IRCBot extends PircBot {
 			}
 			if (message.startsWith("~Q")) {
 				quitServer("And so the time has come....");
+				saveSettings();
 				System.out.println("Received ~Q, exiting.");
 				System.exit(0);
 			}
