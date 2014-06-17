@@ -31,7 +31,7 @@ public class IRCBotMain {
 	    }
 	    bot.joinChannel(chan);
 	    //bot.setVerbose(false);
-	    bot.sendMessage(chan,Colors.RED+"Hello there!");
+	    bot.sendMessage(chan,Colors.GREEN+"Hello there!");
 	}
 }
 
