@@ -112,10 +112,16 @@ class IRCBot extends PircBot {
 		}
 		
 		out.close();
-
 	}
 	
 	public void onMessage(String channel, String sender, String login, String hostname, String message) {
+		
+		Set<String> keys = userSettings.keySet();
+		System.out.println(userSettings.size());
+		for (int i = 0; i < keys.size(); i++) {
+			System.out.println(keys.toArray()[i] + ", " + userSettings.get(keys.toArray()[i]));
+		}
+		
 		System.out.println(channel + " -> "+login+"(" + sender + "): "+message);
 		if (!message.startsWith("~")) {
 			System.out.println("No command found.");
@@ -147,6 +153,7 @@ class IRCBot extends PircBot {
 			}
 			if (message.startsWith("~Q")) {
 				quitServer("And so the time has come....");
+				saveSettings();
 				System.out.println("Received ~Q, exiting.");
 				System.exit(0);
 			}
