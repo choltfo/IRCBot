@@ -115,6 +115,13 @@ class IRCBot extends PircBot {
 	}
 	
 	public void onMessage(String channel, String sender, String login, String hostname, String message) {
+		
+		Set<String> keys = userSettings.keySet();
+		System.out.println(userSettings.size());
+		for (int i = 0; i < keys.size(); i++) {
+			System.out.println(keys.toArray()[i] + ", " + userSettings.get(keys.toArray()[i]));
+		}
+		
 		System.out.println(channel + " -> "+login+"(" + sender + "): "+message);
 		if (!message.startsWith("~")) {
 			System.out.println("No command found.");
