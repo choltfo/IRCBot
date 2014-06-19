@@ -1,10 +1,9 @@
 package org.zzl.choltfo.IRCBot;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 public class LindTranslator {
-    public String translate(String input) throws IOException {
+    public String translate(String input) {
     	HashMap<String, String> Dictionary = new HashMap<String, String>();
     	Dictionary.put("claw", "chela");
     	Dictionary.put("yes", "ceja");

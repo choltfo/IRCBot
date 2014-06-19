@@ -118,6 +118,7 @@ class IRCBot extends PircBot {
 		
 		Set<String> keys = userSettings.keySet();
 		System.out.println(userSettings.size());
+		
 		for (int i = 0; i < keys.size(); i++) {
 			System.out.println(keys.toArray()[i] + ", " + userSettings.get(keys.toArray()[i]));
 		}
@@ -131,32 +132,28 @@ class IRCBot extends PircBot {
 			System.out.println("Received ~T from "+sender+". Replying....");
 			sendMessage(sender,message);
 			sendMessage(channel,message);
-			try {
-				if (userSettings.get(sender).broadcastTranslatedEchoes == BTEOptions.sendPrivate) {
-					sendMessage(sender,sender+": "+LT.translate(message.substring(2)));
-				} else if (userSettings.get(sender).broadcastTranslatedEchoes == BTEOptions.broadcastOnChannel) {
-					sendMessage(channel,sender+": "+LT.translate(message.substring(2)));
-				}
-				System.out.println("Sending translated message to "+sender+" via "+ sender);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			//if (userSettings.get(sender).broadcastTranslatedEchoes == BTEOptions.sendPrivate) {
+				sendMessage(sender,sender+": "+LT.translate(message.substring(3)));
+			//} else if (userSettings.get(sender).broadcastTranslatedEchoes == BTEOptions.broadcastOnChannel) {
+				sendMessage(channel,sender+": "+LT.translate(message.substring(3)));
+			//}
+			System.out.println("Sending translated message to "+sender+" via "+ sender);
 		}
 		if (message.startsWith("~Settings")) {
 			System.out.println("Received Settings from "+sender+" on "+channel+". Replying.");
 			sendMessage(channel,sender+": LTRBOP = "+userSettings.get(sender).op+", canTranslate = "+userSettings.get(sender).canTranslate+
 					", echoMode = "+userSettings.get(sender).broadcastTranslatedEchoes);
 		}
-		if (userSettings.get(sender).op) {			// OPs only after here.
-			if (message.startsWith("~S")) {
-				saveSettings();
-			}
-			if (message.startsWith("~Q")) {
-				quitServer("And so the time has come....");
-				saveSettings();
-				System.out.println("Received ~Q, exiting.");
-				System.exit(0);
-			}
+		//if (userSettings.get(sender).op) {			// OPs only after here.
+		if (message.startsWith("~S")) {
+			saveSettings();
 		}
+		if (message.startsWith("~Q")) {
+			quitServer("And so the time has come....");
+			saveSettings();
+			System.out.println("Received ~Q, exiting.");
+			System.exit(0);
+		}
+		//}
 	}
 }
