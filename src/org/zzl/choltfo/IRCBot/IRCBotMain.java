@@ -15,6 +15,7 @@ import org.jibble.pircbot.User;
 
 public class IRCBotMain {
 	final public static String chan = "#CholtfoTesting";
+	
 	public static String name = "LTRB";
 	
 	public static void main(String[] args) throws NickAlreadyInUseException, IOException, IrcException {
@@ -23,12 +24,13 @@ public class IRCBotMain {
 		int i = 0;
 	    while (!bot.isConnected()) {
 	    	try {
-	    		bot.connect("irc.dal.net", 6662);
+	    		bot.connect("irc.dal.net", 6667);
 	    	} catch (NickAlreadyInUseException NAIUE) {
 	    		System.out.println("");
 	    		bot.setNameExt(name+i);
 	    	}
 	    }
+	    
 	    bot.joinChannel(chan);
 	    //bot.setVerbose(false);
 	    bot.sendMessage(chan,Colors.GREEN+"Hello there!");
